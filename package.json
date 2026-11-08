@@ -1,0 +1,8 @@
+{
+  "name": "lector-de-resenas-pioneros-ia",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Lee las reseñas de Google Maps de un negocio y devuelve la ficha de su cliente ideal.",
+  "engines": { "node": ">=20" }
+}

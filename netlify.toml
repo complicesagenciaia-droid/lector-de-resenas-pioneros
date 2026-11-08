@@ -1,0 +1,11 @@
+[build]
+  publish = "public"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Lo que Netlify le pide a quien despliega con el botón "Deploy to Netlify".
+[template.environment]
+  APIFY_TOKEN = "Tu token de Apify (apify.com → Settings → API & Integrations)"
+  ANTHROPIC_API_KEY = "Tu clave de Anthropic (console.anthropic.com → API Keys)"

@@ -1,79 +1,49 @@
-# Lector de reseñas · regalo de la sesión 1 (8 nov 2026)
+# Lector de reseñas · Pioneros IA
 
-## Qué hace
-- La persona pega el enlace de Google Maps de un negocio: el suyo, el de un competidor o uno de su nicho.
-- La herramienta lee sus últimas 80 reseñas y devuelve **la ficha de su cliente ideal:**
-  - Quién es.
-  - Qué resultado compra de verdad, con frases literales.
-  - Qué le duele.
-  - Sus palabras.
-  - La oferta en una frase.
-  - Una oportunidad con IA.
+Pegas el enlace de Google Maps de un negocio y la herramienta lee sus últimas 80 reseñas. Te devuelve **la ficha de su cliente ideal:**
+- Quién es.
+- Qué resultado compra de verdad.
+- Qué le duele.
+- Sus palabras.
+- La oferta en una frase.
+- Una oportunidad con IA.
 
-**Por qué encaja con la mentoría:** las reseñas nunca hablan de herramientas, hablan de resultados. Ahí está la prueba de "nadie compra IA".
+Es tuya: corre en tu cuenta, con tus claves, y no depende de nadie.
 
-## Una sola aplicación, dos caras (decidido el 8 nov)
-`app/` contiene la página (`public/index.html`) y 4 funciones pequeñas (`netlify/functions/`), sin dependencias. Se despliega gratis en **Netlify**, cuyas funciones aguantan hasta 60 segundos.
+## Lo que necesitas (unos 10 minutos)
+1. **Una cuenta de GitHub**, gratis, en github.com.
+2. **Una cuenta de Netlify**, gratis. Entra en netlify.com con tu cuenta de GitHub.
+3. **Un token de Apify**, que es lo que lee las reseñas de Google Maps.
+   - Crea una cuenta en apify.com. El plan gratis trae crédito cada mes.
+   - Ve a Settings, luego API & Integrations, y copia tu token.
+   - Cada lectura de 80 reseñas cuesta unos 2 o 3 centavos de dólar.
+4. **Una clave de Anthropic**, que es la IA que escribe la ficha.
+   - Entra en console.anthropic.com, ve a API Keys y crea una.
+   - Hay que cargar saldo, desde 5 dólares. Cada ficha cuesta unos centavos.
 
-| | Tu versión, la de la demo | La de cada pionero, el regalo |
-|---|---|---|
-| Dónde | Tu Netlify | El Netlify de cada uno |
-| Claves | Las tuyas, con `ACCESS_CODE` para que nadie gaste tus créditos | Las suyas |
-| Cómo | Importas tu repositorio de GitHub | Un botón **Deploy to Netlify** copia tu repositorio a su cuenta y les pide sus 2 claves |
+## Ponerla en marcha
+1. Pulsa el botón **Deploy to Netlify** que te pasé.
+2. Conecta tu GitHub. Netlify crea tu copia del proyecto.
+3. Cuando te pida las variables, pega:
+   - `APIFY_TOKEN`: tu token de Apify.
+   - `ANTHROPIC_API_KEY`: tu clave de Anthropic.
+4. Pulsa **Save & Deploy**. En uno o dos minutos tienes tu enlace, por ejemplo `tu-lector.netlify.app`.
+5. Ábrelo, pega un negocio de Google Maps y listo.
 
-**Probado en local (8 nov), en modo demo:** el código de acceso, la validación del enlace, el flujo completo y un cuerpo inválido. Falta la prueba real con claves.
-
-## Paso a paso: tu versión (unos 30 minutos)
-**A. Apify (5 min)**
-1. Crea una cuenta en apify.com.
-2. Ve a Settings, luego API & Integrations, y copia el **API token**.
-
-**B. Subir el código a GitHub (5 min, desde la web)**
-1. En github.com pulsa **New repository**.
-   - Nombre: `lector-de-resenas-pioneros`.
-   - Público.
-   - **Sin** README.
-   - Pulsa Create.
-2. En la página del repositorio vacío, entra en **uploading an existing file**.
-3. Arrastra **todo lo que hay dentro de `app/`**: `public`, `netlify`, `lib`, `netlify.toml`, `package.json`, `README.md` y `.gitignore`.
-   - Si el explorador no te muestra `.gitignore`, no pasa nada.
-   - **Nunca subas un archivo `.env`.**
-4. Pulsa **Commit changes**.
-
-**C. Netlify (10 min)**
-1. En app.netlify.com ve a **Add new site**, luego **Import an existing project**, luego **GitHub**, y elige `lector-de-resenas-pioneros`.
-2. Deja la configuración como viene: la lee de `netlify.toml`.
-3. En **Environment variables** añade:
-   - `APIFY_TOKEN`
-   - `ANTHROPIC_API_KEY`
-   - `ACCESS_CODE`, por ejemplo `PIONERO8`
-4. Pulsa **Deploy** y, en uno o dos minutos, tienes tu enlace `algo.netlify.app`.
-5. Opcional: en Domain management añade `lector.pionerosia.io`.
-
-**D. Probar (10 min)**
-- Tu negocio o el de un cliente, con "Es mi negocio".
-- Un negocio de tu ciudad, con "Le quiero vender".
-- Un enlace corto del móvil (`maps.app.goo.gl`).
-- Un código incorrecto, que no tiene que pasar.
-- **Si algo falla:** en Netlify, abre Logs y luego Functions, y mándame lo que salga. Mientras tanto, `DEMO_MODE=1` saca una ficha de ejemplo.
-
-## El regalo: el botón para los pioneros
-Con tu repositorio público, este es el enlace. Cambia `TU-USUARIO`:
-```text
-https://app.netlify.com/start/deploy?repository=https://github.com/TU-USUARIO/lector-de-resenas-pioneros
-```
-Netlify les copia el repositorio a su GitHub y les pide `APIFY_TOKEN` y `ANTHROPIC_API_KEY`. Las preguntas salen de `netlify.toml`. **No** les pide `ACCESS_CODE`, así que tu código no viaja con la copia.
-
-## Qué les entregas y cuándo
-- **En vivo:** haces la demo con tu versión.
-- **Al final:** les das el botón Deploy y la guía (`app/README.md`, que es lo que verán en GitHub). Solo a quienes están, como siempre.
-- **(Opcional) Un PDF** con la guía y capturas paso a paso. Te lo preparo si quieres.
-
-## Archivos
-| Archivo | Para qué |
+## Opcional
+| Variable | Para qué |
 |---|---|
-| `app/public/index.html` | La página |
-| `app/netlify/functions/` | `config`, `start` (arranca Apify), `status` (lo sigue) y `analyze` (baja las reseñas y Claude escribe la ficha) |
-| `app/lib/lector.js` | La lógica y el prompt de la ficha |
-| `app/README.md` | La guía para los pioneros |
-| `prompt-analisis.md` | El prompt de la ficha, por si quieres leerlo. El que se usa está dentro de `app/lib/lector.js` |
+| `ACCESS_CODE` | Si pones un código, la página lo pide antes de usarse. Así nadie te gasta tus créditos si compartes el enlace |
+| `ANTHROPIC_MODEL` | Otro modelo de Anthropic. Por defecto usa `claude-sonnet-5-5` |
+| `DEMO_MODE=1` | Muestra una ficha de ejemplo sin gastar nada, para ver el diseño |
+
+Para cambiar una variable después: en Netlify, abre el sitio, ve a Site configuration y luego a Environment variables. Al terminar, ve a Deploys y pulsa Trigger deploy.
+
+## Cómo usarla
+- **Si tienes un negocio:** analiza el tuyo y el de 2 competidores. Lo que compran sus clientes es lo que tú tienes que vender.
+- **Si vendes servicios de IA:** analiza un negocio de tu nicho antes de hablar con él. Llegas sabiendo qué le duele, contado con las palabras de sus propios clientes.
+
+## Cuida tus claves
+- Nunca pegues tus claves en el código ni las compartas.
+- Van solo en las variables de entorno de Netlify.
+- Si una clave se te escapa, bórrala en Apify o en Anthropic y crea otra.
